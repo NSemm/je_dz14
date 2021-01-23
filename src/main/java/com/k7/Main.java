@@ -15,6 +15,17 @@ public class Main {
         return rezList;
     }
 
+        public static File findAbsoluteFile(File dir, String fileName) {
+        File rez= null;
+        for (File list : dir.listFiles()) {
+            if (list.isDirectory()) findAbsoluteFile(list.getAbsoluteFile(), fileName);
+                rez = list.getName().equals(fileName) ? list.getAbsoluteFile() : null;
+            }
+        System.out.println(rez);
+        return rez;
+    }
+
+
     public static void main(String[] args) {
         File file = new File("test.txt");
         File path = new File(".");
@@ -24,8 +35,11 @@ public class Main {
             for (File f : rez) {
                 System.out.println(f);
             }
+            System.out.println("-------------------");
+            System.out.println("file: "+findAbsoluteFile(path, "test.txt"));
         } else {
             System.out.println("Invalid path or not directory");
         }
+
     }
 }
